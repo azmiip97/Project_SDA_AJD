@@ -47,7 +47,7 @@ data_berhalangan = {'A': {'01-03-2022': ['08:00']}}
 root_node = Node("Root")
 build_pohon(root_node, list_tgl, list_jam, dosen_kampus, data_berhalangan)
 
-print("\na")
+print("\n")
 dfs_rekursif(root_node)
 
 
