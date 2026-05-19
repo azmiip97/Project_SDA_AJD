@@ -44,7 +44,6 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
             if len(dosen_tersedia) == 4:
                 node_jam.add_child(Node("X"))
 
-            # jika hanya sebagian dosen tersedia
             elif len(dosen_tersedia) > 0:
                 for ds in dosen_tersedia:
                     node_jam.add_child(Node(f"Dosen {ds}"))
