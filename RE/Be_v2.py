@@ -45,7 +45,7 @@ list_jam = ['07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:0
             '15:30', '16:00', '16:30', '17:00'
             ]
 dosen_kampus = ['A', 'B', 'C', 'D']
-data_berhalangan = data_berhalangan = {
+data_berhalangan = {
     'A': {
         '01-03-2022': ['08:00'],
         '02-03-2022': ['10:00', '10:30', '11:00', '11:30', '15:30', '16:00', '16:30', '17:00'],
@@ -93,6 +93,6 @@ build_pohon(root_node, list_tgl, list_jam, dosen_kampus, data_berhalangan)
 print("\n")
 dfs_rekursif(root_node)
 
-
+print('ahh')
 
 
