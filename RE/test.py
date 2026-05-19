@@ -29,7 +29,7 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
         for j in jam_list:
             node_jam = Node(f"Jam {j}")
 
-            ada_dosen = False
+            dosen_tersedia = []
 
             for ds in dosen_list:
                 sibuk = (
@@ -39,10 +39,17 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
                 )
 
                 if not sibuk:
-                    node_jam.add_child(Node(f"Dosen {ds}"))
-                    ada_dosen = True
+                    dosen_tersedia.append(ds)
 
-            if ada_dosen:
+            if len(dosen_tersedia) == 4:
+                node_jam.add_child(Node("X"))
+
+            # jika hanya sebagian dosen tersedia
+            elif len(dosen_tersedia) > 0:
+                for ds in dosen_tersedia:
+                    node_jam.add_child(Node(f"Dosen {ds}"))
+
+            if len(node_jam.children) > 0:
                 node_tgl.add_child(node_jam)
 
 def cek_jadwal(tgl, jam, jadwal_sibuk, list_dosen):
