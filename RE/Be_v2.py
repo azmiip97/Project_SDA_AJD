@@ -20,7 +20,7 @@ def dfs_rekursif(node, visited=None, level=0):
 
 def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
     for t in tgl_list:
-        if t in ["28-02-2022", "03-03-2022"]: 
+        if t in ["28-02-2022", "03-03-2022", "05-03-2022", "06-03-2022"]: 
             continue
         node_tgl = Node(f"Tanggal: {t}")
         root.add_child(node_tgl)
@@ -40,7 +40,10 @@ def cek_jadwal(tgl, jam, jadwal_sibuk, list_dosen):
     return True
 
 list_tgl = ['01-03-2022', '02-03-2022']
-list_jam = ['08:00', '09:00']
+list_jam = ['07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', 
+            '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00',
+            '15:30', '16:00', '16:30', '17:00'
+            ]
 dosen_kampus = ['A', 'B', 'C', 'D']
 data_berhalangan = {'A': {'01-03-2022': ['08:00']}}
 
