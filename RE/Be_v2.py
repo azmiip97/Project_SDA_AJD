@@ -51,4 +51,7 @@ print("\n")
 dfs_rekursif(root_node)
 
 
+print('itu dia')
+
+
 
