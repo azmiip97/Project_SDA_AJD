@@ -114,4 +114,4 @@ build_pohon(root_node, list_tgl, list_jam, dosen_kampus, data_berhalangan)
 print("\n")
 dfs_rekursif(root_node)
 
-print("oi")
+
