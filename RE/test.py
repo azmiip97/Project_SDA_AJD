@@ -38,6 +38,8 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
                     t in sibuk_dict[ds] and
                     j in sibuk_dict[ds][t]
                 )
+                if sibuk:
+                    break
 
                 if not sibuk:
                     dosen_tersedia.append(ds)
