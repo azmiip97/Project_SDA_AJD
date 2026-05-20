@@ -18,8 +18,9 @@ def dfs_rekursif(node, visited=None, level=0):
         if child not in visited:
             dfs_rekursif(child, visited, level + 1)
 
+
 def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
-     for t in tgl_list:
+    for t in tgl_list:
         if t in ["28-02-2022", "03-03-2022", "05-03-2022", "06-03-2022"]:
             continue
 
@@ -29,27 +30,24 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
         for j in jam_list:
             node_jam = Node(f"Jam {j}")
 
-            jumlah_tersedia = 0
+            dosen_tersedia = []
 
             for ds in dosen_list:
-
                 sibuk = (
                     ds in sibuk_dict and
                     t in sibuk_dict[ds] and
                     j in sibuk_dict[ds][t]
                 )
 
-                # jika ada dosen yang sibuk -> stop
-                if sibuk:
-                    break
+                if not sibuk:
+                    dosen_tersedia.append(ds)
 
-                # kalau tersedia, print
-                node_jam.add_child(Node(f"Dosen {ds}"))
-                jumlah_tersedia += 1
+            if len(dosen_tersedia) == 4:
+                node_jam.add_child(Node("X"))
 
-            # jika semua 4 dosen tersedia
-            if jumlah_tersedia == 4:
-                node_jam.children = [Node("X")]
+            elif len(dosen_tersedia) > 0:
+                for ds in dosen_tersedia:
+                    node_jam.add_child(Node(f"Dosen {ds}"))
 
             if len(node_jam.children) > 0:
                 node_tgl.add_child(node_jam)
@@ -114,5 +112,4 @@ build_pohon(root_node, list_tgl, list_jam, dosen_kampus, data_berhalangan)
 print("\n")
 dfs_rekursif(root_node)
 
-
-#test
+print("oi")
