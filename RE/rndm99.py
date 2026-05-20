@@ -12,6 +12,9 @@ def dfs_first_match_random(node, visited=None, parent_value=""):
         visited = set()
     visited.add(node)
  
+    if node.value.startswith("Tanggal"):
+        parent_value = node.value
+
     if node.value.startswith("Jam"):
         if node.children:
             pilihan = random.choice(node.children) 
