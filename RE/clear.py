@@ -6,21 +6,23 @@ class Node:
     def add_child(self, obj):
         self.children.append(obj)
 
-def dfs_rekursif(node, visited=None, level=0):
-    if visited is None:
-        visited = set()
-    visited.add(node)
-    
+# inisiasi node dan fungsi menambahkan anak dari node
+
+def dfs_rekursif(node, visited=None, level=0): # fungsi yang memulai algoritma dfs sekaligus akan print outputnya
+    if visited is None: 
+        visited = set() 
+    visited.add(node) # untuk root pasti akan dibuat visited yang menmpan data di set, kemudian root ditambahkan di visited
     tab = "  " * level
-    print(f"{tab}|-- {node.value}")
+    print(f"{tab}|-- {node.value}") # untuk merapikan output
 
     for child in node.children:
         if child not in visited:
-            dfs_rekursif(child, visited, level + 1)
+            dfs_rekursif(child, visited, level + 1) # untuk setiap anak dari children, jika tidak ada di visited maka jalankan rekrusif dfs lagi namun sekarang dengan parameter anak dari node dan level+1
 
+# sehingga fungsi ini akan menjelajahi setiap anak dari semua node dengan algortima dfs dan membuat output berupa tree dan susunan jadwal yang lengkap
 
 def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
-    for t in tgl_list:
+     for t in tgl_list:
         if t in ["28-02-2022", "03-03-2022", "05-03-2022", "06-03-2022"]:
             continue
 
@@ -30,35 +32,38 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
         for j in jam_list:
             node_jam = Node(f"Jam {j}")
 
-            dosen_tersedia = []
+            jumlah_tersedia = 0
 
             for ds in dosen_list:
+
                 sibuk = (
                     ds in sibuk_dict and
                     t in sibuk_dict[ds] and
                     j in sibuk_dict[ds][t]
                 )
+
+                # jika ada dosen yang sibuk -> stop
                 if sibuk:
                     break
 
-                if not sibuk:
-                    dosen_tersedia.append(ds)
+                # kalau tersedia, print
+                node_jam.add_child(Node(f"Dosen {ds}"))
+                jumlah_tersedia += 1
 
-            if len(dosen_tersedia) == 4:
-                node_jam.add_child(Node("X"))
-
-            elif len(dosen_tersedia) > 0:
-                for ds in dosen_tersedia:
-                    node_jam.add_child(Node(f"Dosen {ds}"))
+            # jika semua 4 dosen tersedia
+            if jumlah_tersedia == 4:
+                node_jam.children = [Node("X")]
 
             if len(node_jam.children) > 0:
                 node_tgl.add_child(node_jam)
 
-def cek_jadwal(tgl, jam, jadwal_sibuk, list_dosen):
-    for d in list_dosen:
-        if d in jadwal_sibuk and tgl in jadwal_sibuk[d]:
-            if jam in jadwal_sibuk[d][tgl]: return False
-    return True
+# fungsi ini membuat susunan node yang nantinya akan di print oleh fungsi dfs rekrusif
+
+# def cek_jadwal(tgl, jam, jadwal_sibuk, list_dosen):
+#     for d in list_dosen:
+#         if d in jadwal_sibuk and tgl in jadwal_sibuk[d]:
+#             if jam in jadwal_sibuk[d][tgl]: return False
+#     return True
 
 list_tgl = ['28-02-2022','01-03-2022', '02-03-2022','03-03-2022','04-03-2022','05-03-2022','06-03-2022','07-03-2022','08-03-2022','09-03-2022','10-03-2022','11-03-2022']
 list_jam = ['07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', 
