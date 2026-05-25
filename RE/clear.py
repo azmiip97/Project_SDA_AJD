@@ -21,20 +21,20 @@ def dfs_rekursif(node, visited=None, level=0): # fungsi yang memulai algoritma d
 
 # sehingga fungsi ini akan menjelajahi setiap anak dari semua node dengan algortima dfs dan membuat output berupa tree dan susunan jadwal yang lengkap
 
-def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
+def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):  #fungsi untuk menyusun data jadwal secara otomatis dari atas ke bawah
      for t in tgl_list:
-        if t in ["28-02-2022", "03-03-2022", "05-03-2022", "06-03-2022"]:
+        if t in ["28-02-2022", "03-03-2022", "05-03-2022", "06-03-2022"]:   #memfilter hari besar dan hari libur
             continue
 
-        node_tgl = Node(f"Tanggal: {t}")
-        root.add_child(node_tgl)
+        node_tgl = Node(f"Tanggal: {t}")    #node tanggal sementara untuk tanggal yang sedang diproses
+        root.add_child(node_tgl)    #juga mengaitkan node tanggal ke node root
 
-        for j in jam_list:
-            node_jam = Node(f"Jam {j}")
+        for j in jam_list:  
+            node_jam = Node(f"Jam {j}")   #node jam sementara untuk jam yang sedang diproses
 
-            jumlah_tersedia = 0
+            jumlah_tersedia = 0 #untuk menghitung jumlah dosen yang tersedia
 
-            for ds in dosen_list:
+            for ds in dosen_list:   #untuk mengecek ketersediaan masing-masing dosen
 
                 sibuk = (
                     ds in sibuk_dict and
@@ -52,9 +52,9 @@ def build_pohon(root, tgl_list, jam_list, dosen_list, sibuk_dict):
 
             # jika semua 4 dosen tersedia
             if jumlah_tersedia == 4:
-                node_jam.children = [Node("X")]
+                node_jam.children = [Node("X")] #simbol X sebagai penanda bahwa semua dosen bisa.
 
-            if len(node_jam.children) > 0:
+            if len(node_jam.children) > 0:  #untuk memastikan node jam punya min 1 anak, karna jika tidak ada anak maka node jam tidak dibuat
                 node_tgl.add_child(node_jam)
 
 # fungsi ini membuat susunan node yang nantinya akan di print oleh fungsi dfs rekrusif
